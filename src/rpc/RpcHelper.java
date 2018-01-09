@@ -2,12 +2,15 @@ package rpc;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import entity.Item;
 
 
 // use this helper class to do the write Json/JsonArray function to eliminate duplicate code segments.
@@ -59,5 +62,19 @@ public class RpcHelper {
 			e.printStackTrace();
 		}
 	}
+
+	// Converts a list of Item objects to JSONArray.
+	public static JSONArray getJSONArray(List<Item> items) {
+		JSONArray result = new JSONArray();
+		try {
+			for (Item item : items) {
+				result.put(item.toJSONObject());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }
 
